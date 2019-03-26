@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <span id="helloArea">hello javascript</span>
+
+  <br>
+  <input type="text" id="inputText">
+  <input type="text" id="orange">
+  <input type="text" value="abc">
+  <input type="text" id="animal">
+
+  <input type="button" value="버튼1" id="button1">
+  <input type="button" value="버튼2" id="button2">
+
+  <br>
+  <br>
+
+  <input type="text" id="number1">
+  <input type="text" id="number2">
+
+  <input type="button" value="합" id="buttonSum">
+
+
+<br>
+<br>
+<font size=5> 안 보고 연습 </font>
+<br>
+  <input type="text" id="sumNum1">
+  <input type="text" id="sumNum2">
+  <input type="button" id="sumButton" value="합 버튼">
+
+</body>
+
+
+<script>
+  // console.log("hello javascript");
+  // document.getElementById('helloArea').innerHTML = "abcd";
+  //
+  // var a = 10;
+  // console.log("10 + 10", 10 + 10);
+  // console.log(100 - 60);
+  // console.log(7 * 7);
+  // console.log(20 / 3);
+
+  document.getElementById('button1').addEventListener('click', function() {
+    alert(document.getElementById('inputText').value)
+  });
+
+  document.getElementById('button2').addEventListener('click', function() {
+    if ((document.getElementById('orange').value) = "apple") {
+      alert("사과")
+    }
+  });
+
+
+  document.getElementById('buttonSum').addEventListener('click', function() {
+    var a = document.getElementById('number1').value
+    var b = document.getElementById('number2').value
+
+  var answer = Number(a) + Number(b)
+    if (answer >= 10) {
+      alert("10이상")
+    } else {
+      alert("10미만")
+    }
+  });
+
+// body에 만든 입력란이랑 버튼
+//   <br>
+//   <br>
+//     <input type="text" id="sumNum1">
+//     <input type="text" id="sumNum2">
+//     <input type="button" id="sumButton" value="합 버튼">
+
+// var num1 = document.getElementById('sumNum1');
+// var num2 = document.getElementById('sumNum2');
+// var answerSum = Number(num1) + Number(num2);
+//
+// console.log(answerSum);
+
+
+document.getElementById('sumButton').addEventListener('click', function(){
+
+// alert(1)  ---> 버튼 작동하는지 확인
+
+  var num1 = document.getElementById('sumNum1').value
+  var num2 = document.getElementById('sumNum2').value
+  var answerSum = Number(num1) + Number(num2)
+
+  console.log(answerSum)
+
+  if (answerSum >= 10) {
+    alert("10이상")
+  } else {
+    alert("10미만")
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if(3) {
+  //   console.log(true);
+  // } else{
+  //   console.log(false);
+  // }
+  //
+</script>
+
+</html>
