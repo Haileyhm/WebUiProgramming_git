@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  <input type="text" id="userInput">
+  <input type="button" id="btn" name="구구단" value="구구단">
+  <br>
+  <span id="times"></span>
+
+
+  <script>
+
+
+
+    document.getElementById('btn').addEventListener('click', function() {
+      var guguOut = "";
+      var gugu = document.getElementById('userInput').value;
+
+      for (var i = 1; i < 100; i++) {
+        guguOut += gugu + '*' + i + '=' + gugu * i+'<br>';
+      }
+      console.log(guguOut);
+      document.getElementById('times').innerHTML = guguOut;
+    });
+
+  </script>
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</html>

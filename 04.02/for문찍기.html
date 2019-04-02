@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <span id="numberArea"></span>
+  <br>
+  <br>
+  <span id="praC"></span>
+
+
+
+  <script>
+    var numberText = "";
+
+
+    for (var i = 1; i <= 100; i++) {
+      // numberText += i + "   ";
+
+      if (i % 10 == 0) {
+        numberText += i + "   " + "<br>";
+      } else {
+        numberText += i + "   ";
+      }
+    }
+
+
+    var pracText = "";
+    for (var k = 0; k < 10; k = k + 1) {
+      for (var l = 1; l <= 10; l = l + 1) {
+        pracText += k * 10 + l + "  "; //빈 상자에다가 값을 쌓아줄거야
+      }
+      pracText += '<br>'
+    }
+
+
+    console.log(numberText);
+    document.getElementById('numberArea').innerHTML = numberText;
+    document.getElementById('praC').innerHTML = pracText;
+  </script>
+
+
+</body>
+
+
+
+</html>

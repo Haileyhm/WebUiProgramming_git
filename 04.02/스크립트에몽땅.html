@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <span id="loginFormArea"></span>
+  <span id="formCreateArea"></span>
+
+
+
+  <script>
+    document.getElementById('formCreateArea').innerHTML =
+      '<input type="button" value="로그인 양식 띄우기" id=loginFormCreateBtn>';
+
+    document.getElementById('loginFormCreateBtn').addEventListener('click', function() {
+      document.getElementById('loginFormArea').innerHTML
+      = 'ID: <input type="text"> <br> PASSWORD: <input type="text">'
+      + '<br><input type="button" value="로그인">';
+
+      document.getElementById('formCreateArea').innerHTML = ''; //click 했을 때 없어짐
+
+      //body에 넣을 것들을 스크립트에 문자형으로 다 넣을 수 있음
+    });
+  </script>
+
+
+</body>
+
+</html>
