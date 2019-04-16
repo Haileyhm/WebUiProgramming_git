@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    //객체 1.각종 속성을 가질 수 있음 2.배열 안에 들어갈 수 있음
+
+    var fruits = [];
+    var fruit1 = {}; //객체는 이렇게 선언 : {}
+    var fruit2 = {};
+
+    fruit1.color = "red"; //fruit1이라는 객체를 만들어서 변수를 넣음, 각종 속성을 가짐
+    fruit1.weight = "120g";
+    fruit1.consumedDate = []; //배열을 속성으로 가질 수도 있음
+    fruit1.consumedDate[0] = '2019-03-27';
+    fruit1.consumedDate[1] = '2019-04-16';
+    fruit2.name = "apple";
+    fruit2.bestbefore = "20Apr";
+
+    fruits[0] = fruit1, fruits[1] = fruit2; // 배열 안에 들어갈 수 있음
+    fruits[2] = { //따로 변수를 선언하지 않고 객체 안에 바로 속성을 넣어줌
+      name: "apple",
+      bestbefore: "20Apr"
+    }
+
+    console.log(fruits)
+  </script>
+
+</body>
+
+</html>

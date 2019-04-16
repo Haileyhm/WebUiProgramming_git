@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+<!--주석안내
+: <body>의 html주석(ctrl+/)과 아래 <script>의 javascript의 주석(//)은 다름  -->
+<!-- 여러 radio 중 하나만 선택되게 하려면 name을 같게 해야함 -->
+
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn">
+  <input type="radio" name="radioBtn"><br>
+  <input type="button" value="몇번째" id="btn">
+
+  <script>
+    //객체 1.각종 속성을 가질 수 있음 2.배열 안에 들어갈 수 있음
+
+    var cars = [];
+    var car1 = {}; //객체는 이렇게 선언
+    var car2 = {};
+
+    car1.color = "red"; //car1이라는 객체를 만들어서 변수를 넣음
+    car1.weight = "500kg";
+    car1.number = 1234;
+    car1.kind = "소나타";
+    car1.accidentHistory = [];
+    car1.accidentHistory[0] = '2011-03-01';
+    car1.accidentHistory[1] = '2013-04-16';
+    car2.name = "abc";
+    car2.abc = 123;
+
+    cars[0] = car1, cars[1] = car2;
+    cars[2] = { //따로 변수를 선언하지 않고 바로 속성을 넣어줌
+      name: "abc",
+      age: 123
+    }
+
+    console.log(cars)
+
+    //name을 가져와서 콘솔에 찍으면 4개가 들어간 배열이 만들어짐 -> 브라우저가 알아서 제공
+    console.log(document.getElementsByName('radioBtn')); //[input, input, input, input, input, input, input] 출력
+
+    document.getElementById('btn').addEventListener('click', function() {
+      var radios = document.getElementsByName('radioBtn'); //Name 은 반복해서 사용할 수 있기 때문에 복수
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked == true) {
+          alert(i + 1);
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
