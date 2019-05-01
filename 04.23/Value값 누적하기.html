@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  숫자1 <input type="text" id="box1"> <br>
+  숫자2 <input type="text" id="box2"> <br>
+  <input type="button" name="" value="계산" id="btn"><br><br>
+  <input type="button" name="" value="+" id="btnSum">
+  <input type="button" name="" value="+" id="btnSum">
+  <!--곱셈형태의 결과가 들어갈 자리  -->
+  곱하기:<br>
+  <span id="resultArea"></span><br>
+  더하기:<br>
+  <span id="sumArea"></span><br>
+  나누기:<br>
+  <span id="divideArea">
+  횟수: <span id="cnt"></span>
+
+  <script>
+    var cntNum = 0; //지역변수로 선언해줘야 버튼 눌렀을 때 값이 쌓이지
+    var resultAreabtn = ""; //얘를 공백으로 정의해줘야 밑에서 변수로 사용할 수 있음. 아니면 그냥 쌓아
+    document.getElementById('btn').addEventListener('click', function() {
+
+      var box1 = Number(document.getElementById('box1').value); //곱하기는 괜찮은데, 더하기 경우 문자열도 더해버리는 문제 발생
+      var box2 = Number(document.getElementById('box2').value);
+
+      cntNum++; //1씩 증가
+      resultAreabtn += `${box1} x ${box2} = ${box1 * box2}<br>`;
+
+      document.getElementById('resultArea').innerHTML += `${box1} x ${box2} = ${box1 * box2}<br>`;
+      document.getElementById('sumArea').innerHTML += `${box1} + ${box2} = ${box1 + box2}<br>`;
+      document.getElementById('cnt').innerHTML = cntNum;
+
+    });
+  </script>
+
+
+</body>
+</html>

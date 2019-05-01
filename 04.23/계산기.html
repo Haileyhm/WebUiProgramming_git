@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  숫자1 <input type="text" id="box1"> <br>
+  숫자2 <input type="text" id="box2"> <br>
+
+  &nbsp &nbsp &nbsp &nbsp
+  <input type="button" name="" value="x" id="btnTimes">
+  <input type="button" name="" value="+" id="btnSum">
+  <input type="button" name="" value="reset" id="reset">
+
+
+  <!--곱셈형태의 결과가 들어갈 자리  -->
+  <br>
+  <br>
+  <span id="timesArea"></span><br>
+  <br>
+  <span id="sumArea"></span><br>
+  <br>
+  <span id="totalArea"></span> <br>
+  <span id="evenSumArea"></span> <br>
+  <span id="cnt"></span>
+
+  <script>
+    var cntNum = 0; //지역변수로 선언해줘야 버튼 눌렀을 때 값이 쌓이지
+    var totalSum = 0;
+    var resultAreabtn = ""; //얘를 공백으로 정의해줘야 밑에서 변수로 사용할 수 있음. 아니면 그냥 쌓아
+    var evenSum = 0;
+
+    //곱하기 작업수행
+    document.getElementById('btnTimes').addEventListener('click', function() {
+
+      var box1 = Number(document.getElementById('box1').value); //곱하기는 괜찮은데, 더하기 경우 문자열도 더해버리는 문제 발생
+      var box2 = Number(document.getElementById('box2').value);
+
+      cntNum++; //1씩 증가
+      resultAreabtn += `${box1} x ${box2} = ${box1 * box2}<br>`;
+
+      document.getElementById('timesArea').innerHTML += `곱하기: ${box1} x ${box2} = ${box1 * box2}<br>`;
+      document.getElementById('cnt').innerHTML = `횟수:${cntNum}`;
+
+    });
+
+    // 더하기 작업수행
+    document.getElementById('btnSum').addEventListener('click', function() {
+      var box1 = Number(document.getElementById('box1').value);
+      var box2 = Number(document.getElementById('box2').value);
+
+      totalSum += (box1 + box2);
+
+      document.getElementById('sumArea').innerHTML += `더하기: ${box1} + ${box2} = ${box1 + box2}<br>`;
+      document.getElementById('totalArea').innerHTML = `총합: ${totalSum}`;
+      cntNum++;
+      document.getElementById('cnt').innerHTML = `횟수:${cntNum}`;
+      if ((box1+box2) % 2 == 0) {
+        evenSum += box1;
+document.getElementById('evenSum').innerHTML = `짝수합: ${}`
+      }
+
+
+
+    });
+
+    document.getElementById('reset').addEventListener('click', function() {
+      document.getElementById('timesArea').innerHTML = "";
+      document.getElementById('sumArea').innerHTML = "";
+      //  document.getElementById('divideArea').innerHTML = "";
+      document.getElementById('totalArea').innerHTML = "";
+      document.getElementById('cnt').innerHTML = "";
+      document.getElementById('box1').value = "";
+      document.getElementById('box2').value = "";
+      cntNum = 0; //횟수 초기화
+      totalSum = 0;
+
+
+    })
+  </script>
+
+
+</body>
+
+</html>

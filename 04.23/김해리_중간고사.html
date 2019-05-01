@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>test.html</title>
+</head>
+
+<body>
+
+  <!--입력란 -->
+  이름: <input type="text" id="nameBox" name="" value=""> <br>
+  html: <input type="text" id="htmlBox" name="" value=""><br>
+  javascript: <input type="text" id="javascriptBox" name="" value=""><br>
+  css: <input type="text" id="cssBox" name="" value=""><br>
+  nodejs: <input type="text" id="nodejsBox" name="" value=""><br>
+  mysql: <input type="text" id="mysqlBox" name="" value=""><br>
+
+  <!--버튼  -->
+  <br>
+  <input type="button" id="gradeBtn" name="" value="성적입력">
+  <input type="button" id="resetBtn" name="" value="초기화">
+
+  <!--span 공간 -->
+  <br>
+  <br>
+  <span id="eachStudent"></span>
+  <br>
+  <br>
+  <span id="allStudentAvg"></span>
+  <span id="bestStudent"></span>
+
+
+  <script>
+
+    //성적입력 버튼 누르면 -> 입력란에서 받은 값을 가져와야 함
+    //평균산출 해야하니깐 우선 전역변수로 해주자
+    var eachAvg = 0;
+    var eachAvgSum = 0;
+    var eachAvgSumAvg = 0;
+    var htmlBoxSum = 0;
+    var htmlBoxAvg = 0;
+    var javascriptBoxSum = 0;
+    var javascriptBoxAvg = 0;
+    var cssBoxSum = 0;
+    var cssBoxAvg = 0;
+    var nodejsBoxSum = 0;
+    var nodejsBoxAvg = 0;
+    var mysqlBoxSum = 0;
+    var mysqlBoxAvg = 0;
+    var cnt = 0;
+    // var compareAvg = eachAvg;
+    // 최고는 평균값 비교한 다음에 바꿔주면 안되나?
+    // if (eachAvg > compareAvg) {
+    // document.getElementById('bestStudent').innerHTML = `최고점자 이름: ${nameBox} /
+    // 평균: ${eachAvg}<br>`
+    // };
+
+    var bestAvg;
+
+    document.getElementById('gradeBtn').addEventListener('click', function() {
+      console.log(eachAvg)
+      var nameBox = "";
+      var htmlBox = 0;
+      var javascriptBox = 0;
+      var cssBox = 0;
+      var nodejsBox = 0;
+      var mysqlBox = 0;
+
+      // console.log(nameBox)
+      // console.log(htmlBox)
+
+      nameBox = document.getElementById('nameBox').value;
+      htmlBox = Number(document.getElementById('htmlBox').value);
+      javascriptBox = Number(document.getElementById('javascriptBox').value);
+      cssBox = Number(document.getElementById('cssBox').value);
+      nodejsBox = Number(document.getElementById('nodejsBox').value);
+      mysqlBox = Number(document.getElementById('mysqlBox').value);
+
+      //평균계산
+      eachAvg = (htmlBox + javascriptBox + cssBox + nodejsBox + mysqlBox) / 5;
+      console.log(eachAvg)
+      // console.log(htmlBox)
+      // console.log(nameBox)
+
+      //allStudent span 에 출력
+      document.getElementById('eachStudent').innerHTML += `이름: ${nameBox} /
+                                                          html: ${htmlBox} /
+                                                          javascript: ${javascriptBox} /
+                                                          css: ${cssBox} /
+                                                          nodejs: ${nodejsBox} /
+                                                          mysql: ${mysqlBox} /
+                                                          ${nameBox}평균: ${eachAvg}<br>`
+
+      //평균 계산
+      cnt++;
+
+      //평균의 평균
+      eachAvgSum += eachAvg;
+      eachAvgSumAvg = eachAvgSum / cnt;
+      console.log(eachAvgSumAvg);
+
+      htmlBoxSum += htmlBox;
+      htmlBoxAvg = htmlBoxSum / cnt;
+      // console.log(htmlBoxAvg);
+
+      javascriptBoxSum += javascriptBox;
+      javascriptBoxAvg = javascriptBoxSum / cnt;
+
+      cssBoxSum += cssBox;
+      cssBoxAvg = cssBoxSum / cnt;
+
+      nodejsBoxSum += nodejsBox;
+      nodejsBoxAvg = nodejsBoxSum / cnt;
+
+      mysqlBoxSum += mysqlBox;
+      mysqlBoxAvg = mysqlBoxSum / cnt;
+
+      document.getElementById('allStudentAvg').innerHTML = `평균:
+                                                          html평균: ${htmlBoxAvg} /
+                                                          javascript평균: ${javascriptBoxAvg} /
+                                                          css평균: ${cssBoxAvg} /
+                                                          nodejs평균: ${nodejsBoxAvg} /
+                                                          mysql평균: ${mysqlBoxAvg} /
+                                                          전체평균: ${eachAvgSumAvg} <br>`;
+
+      //교수님 방법_ 처음에 bestAvg 에 값 넣을 수 있도록 if문 사용
+      if (cnt == 1) {
+        bestAvg = eachAvg;
+        document.getElementById('bestStudent').innerHTML = `최고점자 이름: ${nameBox} /
+                                                        평균: ${bestAvg}<br>`
+      } else if (eachAvg > bestAvg) {
+        bestAvg = eachAvg;
+        document.getElementById('bestStudent').innerHTML = `최고점자 이름: ${nameBox} /
+                                                               평균: ${bestAvg}<br>`
+      };
+      //최고는 평균값 비교한 다음에 바꿔주면 안되나?
+      // if (eachAvg > bestAvg) {
+      // document.getElementById('bestStudent').innerHTML = `최고점자 이름: ${nameBox} /
+      // 평균: ${eachAvg}<br>`
+      // };
+
+      document.getElementById('nameBox').value = "";
+      document.getElementById('htmlBox').value = "";
+      document.getElementById('javascriptBox').value = "";
+      document.getElementById('cssBox').value = "";
+      document.getElementById('nodejsBox').value = "";
+      document.getElementById('mysqlBox').value = "";
+    });
+
+
+    //초기화
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      var eachAvg = 0;
+      var eachAvgSum = 0;
+      var eachAvgSumAvg = 0;
+      var htmlBoxSum = 0;
+      var htmlBoxAvg = 0;
+      var javascriptBoxSum = 0;
+      var javascriptBoxAvg = 0;
+      var cssBoxSum = 0;
+      var cssBoxAvg = 0;
+      var nodejsBoxSum = 0;
+      var nodejsBoxAvg = 0;
+      var mysqlBoxSum = 0;
+      var mysqlBoxAvg = 0;
+      var cnt = 0;
+
+      var nameBox = "";
+      var htmlBox = 0;
+      var javascriptBox = 0;
+      var cssBox = 0;
+      var nodejsBox = 0;
+      var mysqlBox = 0;
+
+
+      document.getElementById('allStudentAvg').innerHTML = ""
+      document.getElementById('eachStudent').innerHTML = ""
+      document.getElementById('bestStudent').innerHTML = ""
+
+      document.getElementById('nameBox').value = "";
+      document.getElementById('htmlBox').value = "";
+      document.getElementById('javascriptBox').value = "";
+      document.getElementById('cssBox').value = "";
+      document.getElementById('nodejsBox').value = "";
+      document.getElementById('mysqlBox').value = "";
+    });
+  </script>
+
+
+</body>
+
+</html>

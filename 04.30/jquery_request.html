@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  1번째 숫자 <input type="text" id="firstBox"><br>
+  2번째 숫자 <input type="text" id="secondBox"><br>
+  3번째 숫자 <input type="text" id="thirdBox"><br>
+  <br>
+
+  <!--곱하기 출력하는 곳  -->
+  <span id="here"></span>
+  <br><br>
+  <!--곱하기 버튼  -->
+  <input type="button" id="timesBtn" value="곱하기">
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    $("#timesBtn").click(function() {
+      var num1 = Number($("#firstBox").val());
+      var num2 = Number($("#secondBox").val());
+      var num3 = Number($("#thirdBox").val());
+
+      $.ajax({
+        url: `http://localhost/sum?num1=${num1}&num2=${num2}&num3=${num3}`,
+        data: {},
+        success: function(response) { //  res.send(`세 수의 곱은 ${num1 * num2 * num3}`)
+          console.log(response);
+          $("#here").html(response);
+        }
+      });
+    })
+  </script>
+
+</body>
+
+</html>

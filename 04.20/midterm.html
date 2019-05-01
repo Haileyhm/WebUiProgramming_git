@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    중간고사 대비 연습
+    <!--타이틀은 명령어없이 내용만 입력-->
+  </title>
+
+  <style>
+    h1>f4 {
+      font-size: 40px;
+      color: red;
+      font-style: italic;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: blue;
+      text-align: left;
+      text-docoration: overline;
+    }
+
+    h3 {
+      font-size: 10px;
+      color: green;
+      text-align: right;
+      text-docoration: underline;
+    }
+
+    h4 {
+      font-size: 50px;
+      color: gray;
+      text-transform: capitalize;
+    }
+
+    h5 {
+      font-size: 25px;
+      color: gold;
+      text-transform: lower-case;
+    }
+
+    h4 {
+      font-size: 35px;
+      color: #795548;
+      text-transform: uppercase;
+    }
+
+    #hi {
+      color: pink;
+    }
+
+    #cold>h7 {
+      color: cyan;
+    }
+
+    .sping {
+      font-size: 100px;
+    }
+  </style>
+
+
+
+</head>
+
+<body>
+
+  03.12 수업내용============================================================
+  <br>
+  1.일반 내용입력<br>
+  <font size="5" color=#98BC43>
+    <!--<실수>내용 구분시 콤마 없음 -->
+    <strong>회원가입</strong>
+  </font>
+
+  <br>
+  <br>
+  2.input<br>
+  아이디: <input type="text" placeholder="아이디를 입력하세요">
+  비밀번호: <input type="password" placeholder="비밀번호를 입력하세요"> <br>
+  남자 <input type="radio" name="genderType" checked>
+  여자 <input type="radio" name="genderType"> <br>
+  <br>
+  <br>
+  3.select<br>
+  생년월일<br>
+  연도 <input type="text">
+  월
+  <select class="" name="">
+    <option value=""> 1월 </option>
+    <option value=""> 2월 </option>
+    <option value=""> 3월 </option>
+    <option value=""> 4월 </option>
+    <option value=""> 5월 </option>
+    <option value="month" selected> 6월 </option>
+    <option value=""> 7월 </option>
+    <option value=""> 8월 </option>
+    <option value=""> 9월 </option>
+    <option value=""> 10월 </option>
+    <option value=""> 11월 </option>
+    <option value=""> 12월 </option>
+  </select>
+  일 <input type="text"> <br>
+
+  <br>
+  <br>
+  03.20 수업내용============================================================
+  <br>
+  1.textarea<br>
+  <textarea type="text" placeholder="글을 입력하세요" width="200" height="300"></textarea>
+
+  <br>
+  <br>
+
+  2.css<br>
+  <h1 class="java"> 안녕하세요
+    <f4> fgg </f4>
+  </h1>
+  <h2>안녕하세요</h2>
+  <f4>dfsf <f4>
+      <h3>안녕하세요</h3>
+      <h4 class="spring">hello world</h4>
+      <h5 id="hi">hello WORLD</h5>
+      <h6 id="cold">HELLO wolrd
+        <h7>여기는 어떤가</h7>
+      </h6>
+
+      <br>
+
+
+      3.table<br>
+      <table width=700 height=200 border=1 id="table1" name="tables"> 1.인적사항
+        <tr>
+          <td rowspan="2"> 사진 </td>
+          <td>한글이름</td>
+          <td>　　　　　</td>
+          <td>주민등록번호</td>
+          <td>　　　　　</td>
+        </tr>
+        <tr>
+
+          <td>영문이름</td>
+          <td></td>
+          <td>생년월일</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>주소</td>
+          <td colspan="4"></td>
+        </tr>
+      </table>
+
+      <table width=700 height=200 border=1 id="table1" name="tables"> 1.인적사항
+        <tr>
+          <td rowspan="2"> 사진 </td>
+          <td>한글이름</td>
+          <td>　　　　　</td>
+          <td>주민등록번호</td>
+          <td>　　　　　</td>
+        </tr>
+
+        <tr>
+
+          <td>영문이름</td>
+          <td>생년월일</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>주소</td>
+          <td></td>
+          <td>주소</td>
+          <td></td>
+          <td>주소</td>
+
+        </tr>
+      </table>
+
+      <table width="100" height="200" border="3" id="prac">
+        중간고사
+        <tr>
+          <td>midterm</td>
+          <td>java</td>
+          <td>python</td>
+        </tr>
+
+        <tr rowspan="2">
+          <td>final</td>
+          <td colspan="2"></td>
+
+        </tr>
+
+        <td></td>
+        <td colspan="2"> webui</td>
+
+
+      </table>
+
+
+      <br>
+      <br>
+      03.26 / 04.09 수업내용=====script에 작업=============================================
+      <br>
+
+
+      1.getElementById
+      <br>
+
+      <input type="text" class="sumNum1">
+      <input type="text" id="sumNum2">
+      <input type="button" id="sumButton" value="합 버튼">
+
+      <br>
+      <br>
+
+      2.for문
+      <input type="text" id="userInput">
+      <input type="button" id="btn" name="구구단" value="구구단">
+      <br>
+      <span id="times"></span>
+      <br>
+      <span id="55분"></span> <!--span을 안 닫아서 계속 표시가 안됐잖아-->
+        <br>
+        <br>
+
+        04.16=======================================================================
+        <br>
+        1<input type="radio" name="radioBtn">
+        2<input type="radio" name="radioBtn">
+        3<input type="radio" name="radioBtn">
+        4<input type="radio" name="radioBtn">
+        5<input type="radio" name="radioBtn">
+        6<input type="radio" name="radioBtn">
+        7<input type="radio" name="radioBtn"><br>
+        <input type="button" value="몇번째">
+
+        왜 안돼<input type="radio" name="why">
+
+
+        <script>
+          console.log("중간시험이 언제 끝나려나")
+
+          document.getElementById('sumButton').addEventListener('click', function() {
+
+            // alert(1)  ---> 버튼 작동하는지 확인
+
+            var num1 = document.getElementByClass('sumNum1').value
+            var num2 = document.getElementById('sumNum2').value
+            var answerSum = Number(num1) + Number(num2)
+
+            console.log(answerSum)
+
+            if (answerSum >= 10) {
+              alert("10이상")
+            } else {
+              alert("10미만")
+            }
+          });
+
+          document.getElementById('btn').addEventListener('click', function() {
+            var guguOut = "";
+            var gugu = document.getElementById('userInput').value;
+
+
+            for (var i = 1; i < 100; i++) {
+              guguOut += gugu + '*' + i + '=' + gugu * i + '<br>';
+              // guguOut += '${gugu} + * + ${i} + = + ${gugu} * ${i} = <br> ' //=================> 이건 어떻게 쓰는건가
+            }
+            console.log(guguOut);
+            document.getElementById('times').innerHTML = guguOut;
+          });
+
+          // var pracText = "";
+          // for (var k = 0; k < 10; k = k + 1) {
+          //   for (var l = 1; l <= 10; l = l + 1) {
+          //     pracText += k * 10 + l + "  "; //빈 상자에다가 값을 쌓아줄거야
+          //   }
+          //   pracText += '<br>'
+          // }
+
+          var pracText = ""
+          for (var i = 0; i < 10; i++) {
+            for (var j = 1; j < 11; j++) {
+              pracText += i * 10 + j + "  ";
+            }
+            pracText += "<br>"
+          }
+
+          console.log(pracText);
+          document.getElementById('55분').innerHTML = pracText;
+
+          console.log(document.getElementsByName('radioBtn')); //[input, input, input, input, input, input, input] 출력
+          console.log(document.getElementsByName('test'));
+        </script>
+
+
+
+
+</body>
+
+</html>

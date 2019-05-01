@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  [계산기] :  버튼을 누르면 번호별로 찍은 숫자 x 가중치 출력
+  <br>
+  <br>
+  <!--각 번호의 라디오버튼 만들기  -->
+  <!-- 1번 라디오버튼-->
+  1번
+  0<input type="radio" name="firstRadio">
+  1<input type="radio" name="firstRadio">
+  2<input type="radio" name="firstRadio">
+  3<input type="radio" name="firstRadio">
+  4<input type="radio" name="firstRadio">
+  <!-- 1번 가중치 -->
+  &nbsp;
+  <!-- &nbsp; 는 한칸 띄우기  --> 가중치 <input type="text" id="firstBox">
+
+  <br>
+  <!-- 2번 라디오버튼-->
+  2번
+  0<input type="radio" name="secondRadio">
+  1<input type="radio" name="secondRadio">
+  2<input type="radio" name="secondRadio">
+  3<input type="radio" name="secondRadio">
+  4<input type="radio" name="secondRadio">
+  <!-- 2번 가중치 -->
+  &nbsp; 가중치 <input type="text" id="secondBox">
+  <br>
+  <!-- 3번 라디오버튼-->
+  3번
+  0<input type="radio" name="thirdRadio">
+  1<input type="radio" name="thirdRadio">
+  2<input type="radio" name="thirdRadio">
+  3<input type="radio" name="thirdRadio">
+  4<input type="radio" name="thirdRadio">
+  <!-- 3번 가중치 -->
+  &nbsp; 가중치 <input type="text" id="thirdBox">
+
+  <br>
+  <!-- 곱셈출력 자리 : script에서 작성한 것은 html이 모르니깐 innerHTML 로 밀어넣어줘야함-->
+  <span id="result">
+  </span>
+  <br>2)
+  <!--버튼 생성-->
+  <input type="button" value="계산" id="Btn">
+
+  <script>
+    //라디오값 가져오기
+    document.getElementById("Btn").addEventListener('click', function() { //<실수>버튼 누를 때는 'onclick'이 아니라 'click'이야
+      var firstR = document.getElementsByName("firstRadio")
+      var secondR = document.getElementsByName("secondRadio")
+      var thirdR = document.getElementsByName("thirdRadio")
+
+      for (var i = 0; i < firstR.length; i++) {
+        if (firstR[i].checked) { //firstR[i].checked 만 써도 됨
+          var firstRR = i;
+          console.log(firstRR) //log로 찍으면서 보면 빨리빨리 확인할 수 있어서 좋음
+        }
+      }
+      for (var i = 0; i < secondR.length; i++) {
+        if (secondR[i].checked == true) {
+          var secondRR = i;
+          console.log(secondRR)
+        }
+      }
+      for (var i = 0; i < thirdR.length; i++) {
+        if (thirdR[i].checked == true) {
+          var thirdRR = i;
+          console.log(thirdRR)
+        }
+      }
+
+      //가중치값 가져오기
+      var firstB = document.getElementById('firstBox').value //input type="text"에서 value를 가져오면 문자형이니깐 숫자형으로 변환해야해
+      var secondB = document.getElementById('secondBox').value
+      var thirdB = document.getElementById('thirdBox').value
+
+      console.log(firstB)
+      console.log(secondB)
+      console.log(thirdB)
+
+      document.getElementById('result').innerHTML = //html 은 script를 모르잖아요 그니깐 inner html로 넣어줘요
+        firstRR + "x" + firstB + "+" +
+        secondRR + "x" + secondB + "+" +
+        thirdRR + "x" + thirdB + "=" +
+        (firstRR * firstB + secondRR * secondB + thirdRR * thirdB)
+      //<실수> 가중치값을 변수로 지정했는데, Id값을 가져왔어... 변수 제대로 생각해야지
+
+      // text = `${firstRR}x${firstB} + ${secondRR}x${secondB} + ${thirdRR}x${thirdB}` //  `${}` 에서 ${} 안의 변수는 해당 수로 인식
+      // document.getElementById('result').innerHTML = text // 같은 id에 중복으로 innerHTML을 해주면 나중에 입력한 값이 변수로 들어가는 거야
+    })
+  </script>
+
+
+
+
+
+</body>
+
+</html>
