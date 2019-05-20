@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+
+  뉴스 출력창
+  <br>
+  <br>
+  <span id="resultArea"></span>
+  <br>
+  <input type="button" id="writeBtn" name="" value="글쓰기">
+  <input type="button" id="deleteBtn" name="" value="전체삭제">
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $.ajax({
+      url: `/select`,
+      data: {},
+      success: function(response) {
+        $('#resultArea').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+        for (var i = 0; i < response.length; i++) {
+          var print = `기사 제목: ${response[i].title} , 기사 내용:  ${response[i].text}`
+          $('#resultArea').append(`${print} <input type="button" value="삭제" onclick="deleteEach(${response[i].no})"><br>`)
+        }
+      }
+    })
+
+    function deleteEach(number) {
+      $.ajax({
+        url: `/deleteEachNews`,
+        data: {
+          no: number
+        },
+        success: function(response) {
+          console.log(response)
+          location.href = "http://localhost/printNews"
+
+          // for (var i = 0; i < response.length; i++) {
+          //   var print = `${response[i].title} : ${response[i].text}`
+          //   $('#resultArea').append(`${print} <input type="button" value="삭제" onclick="deleteEach(${response[i].no})"><br>`)
+        }
+
+      })
+    }
+
+    $('#writeBtn').click(function() {
+      location.href = "http://localhost/inputNews"
+    });
+
+    $('#deleteBtn').click(function() {
+      $('#resultArea').html("")
+      $.ajax({
+        url: `/newsDeleteForm2`,
+        data: {},
+        success: function(response) {
+          location.href = "http://localhost/printNews"
+        }
+      })
+
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

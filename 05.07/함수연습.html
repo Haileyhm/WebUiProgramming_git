@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <!--문제: input 3개를 입력받아 결과보기를 클릭하면 함수를 사용 하여 가장 큰 숫자를 화면에 표시하세요
+return 값을 받아서 출력 / 함수 실행부에서 출력 -->
+
+  <input type="text" id="firstInput" name="" value="">
+  <input type="text" id="secondInput" name="" value="">
+  <input type="text" id="thirdInput" name="" value="">
+
+  <br><br>
+  최고값: <span id="spanArea"></span>
+  <br><br>
+  <input type="button" id="returnBtn" name="" value="return 값으로">
+  <input type="button" name="" id="opertaionBtn" value="함수 실행부에서">
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $(`#opertaionBtn`).click(function() {
+      var firstInput = $(`#firstInput`).val();
+      var secondInput = $(`#secondInput`).val();
+      var thirdInput = $(`#thirdInput`).val();
+
+      operation(firstInput, secondInput, thirdInput);
+    });
+
+    $(`#returnBtn`).click(function() {
+      var firstInput = $(`#firstInput`).val();
+      var secondInput = $(`#secondInput`).val();
+      var thirdInput = $(`#thirdInput`).val();
+
+      $(`#spanArea`).html(returnfunc(firstInput, secondInput, thirdInput));
+    })
+
+
+    function operation(firstInput, secondInput, thirdInput) {
+      var array = [firstInput, secondInput, thirdInput]
+      array.sort(); //array.sort() 만 하면 앞자리로 오름차 내림차순 정렬, sort(function(a,b){return a-b})
+      console.log(array);
+      $(`#spanArea`).html(array[array.length-1]);
+    };
+
+    function returnfunc(firstInput, secondInput, thirdInput) {
+      var array = [firstInput, secondInput, thirdInput]
+      array.sort(function(a,b){return a-b});
+      console.log(array);
+      var toBeReturn = array[array.length-1];
+
+      return toBeReturn
+    };
+  </script>
+
+</body>
+
+</html>

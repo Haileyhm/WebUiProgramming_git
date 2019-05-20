@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  SQL에 데이터 넣고 삭제하기
+  <br><br>
+  제목: <input type="text" id="input1" name="">
+  <br>
+  내용: <input type="text" id="input2" name="">
+  <br>
+  <br>
+  <input type="button" id="inputBtn" name="" value="입력">
+  <input type="button" id="deleteBtn" name="" value="전체삭제">
+  <br>
+  <br>
+<span id="resultArea"> 뉴스가 출력되는 곳 </span>
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $('#inputBtn').click(function() {
+      var input1 = $('#input1').val();
+      var input2 = $('#input2').val();
+      console.log(input1);
+      console.log(input2);
+      console.log("버튼이 눌렸습니다")
+
+      $.ajax({
+        url: `/input`,
+        type: `POST`,
+        //url: `/input?input1=${$('#input1').val()}&input2=${$('#input2').val()}`,
+        data: {
+          input1: input1,
+          input2: input2
+        },
+        success: function(response) {
+          console.log(response)
+          console.log(response.length);
+
+          $('#resultArea').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+          for (var i = 0; i < response.length; i++) {
+            var print = `${response[i].title} : ${response[i].text}`
+            $('#resultArea').append(print, "<br>")
+          }
+        }
+      })
+    });
+
+    $('#deleteBtn').click(function() {
+      console.log("삭제버튼이 눌렸습니다")
+      $('#resultArea').html("")
+
+      $.ajax({
+        url: `/newsDeleteForm2`,
+        type: `POST`,
+        //url: `/input?input1=${$('#input1').val()}&input2=${$('#input2').val()}`,
+        data: { },
+        success: function(response) {
+
+        }
+      })
+    });
+
+  </script>
+</body>
+
+</html>

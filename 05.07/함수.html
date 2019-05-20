@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+
+
+<body>
+  <!--지난 시간 item 리뷰  -->
+  구입희망 가격: <input type="text" id="inputPrice">
+  <input type="button" id="Btn" value="구매">
+  <br>
+  <br>
+  구입가능 상품: <span id="resultArea"></span>
+  <br>
+  <br>
+
+  <!--selectBox 는 .val() 했을 때, value값이 가져와짐   -->
+  <select id="selectBox" name="">
+    <option value="1">닭</option>
+    <option value="2">소</option>
+    <option value="3">말</option>
+    <option value="4">양</option>
+    <input type="button" id="selectButton" name="" value="옵션 출력">
+
+  </select>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    $("#Btn").click(function() {
+      var inputPrice = Number($("#inputPrice").val());
+
+      $.ajax({
+        //1번 url: `http://localhost/getItem?price=${inputPrice}`,
+        //2번
+        url: `http://localhost/getItem`,
+        data: {
+          price: inputPrice,
+          abc: 100
+        }, //post 에서는 이 방식밖에 안됨 , get방식은 1번처럼 url 에 파라미터 쓰는 것도 가능
+        success: function(response) {
+          $("#resultArea").html(response)
+          console.log(response);
+        }
+      })
+    });
+
+
+    $("#selectButton").click(function() {
+      var selectInput = $("#selectBox").val()
+      console.log(selectInput)
+
+      if (selectInput == 1) {
+        console.log("닭을 선택");
+        showMsg2("닭");
+      } else if (selectInput == 2) {
+        console.log("소를 선택")
+      } else if (selectInput == 3) {
+        console.log("말을 선택")
+      } else if (selectInput == 4) {
+        console.log("양을 선택")
+      }
+    });
+
+
+
+    function showMsg(animal) { //animal은 파라미터
+      alert(animal);
+      animal = "소";
+      alert(animal);
+
+    };
+
+    showMsg("돼지"); //위에서 만든 함수 실행, 파라미터로 "돼지"를 넣어줌
+
+
+    function showMsg2(animalName) {
+      console.log(`${animalName}(을)를 선택하셨습니다.`)
+      return 0; //함수는 return 을 만나면 종료
+      console.log(`${animalName} ㅎㅎㅎㅎ.`)
+    };
+
+    showMsg2();
+
+  console.log(plus(3,6));
+
+  function plus(a,b){
+    console.log(a+b);
+    return "return"
+  };
+
+
+
+  </script>
+
+</body>
+
+</html>

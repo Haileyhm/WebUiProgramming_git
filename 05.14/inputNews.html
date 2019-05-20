@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  기사 입력창_DB에도 넣어줍니다
+  <br><br>
+  제목
+  <br><input type="text" id="input1" name="">
+  <br>
+  <br>
+  내용
+  <br> <textarea placeholder="기사를 입력해주세요" name="name" rows="8" cols="80" id="input2"></textarea>
+
+  <br>
+  <br>
+  <input type="button" id="inputBtn" name="" value="입력">
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $('#inputBtn').click(function() {
+      var input1 = $('#input1').val();
+      var input2 = $('#input2').val();
+      console.log(input1);
+      console.log(input2);
+      console.log("버튼이 눌렸습니다")
+
+      $.ajax({
+          url: `/input`,
+          type: 'POST',
+          //url: `/input?input1=${$('#input1').val()}&input2=${$('#input2').val()}`,
+          data: {
+            input1: input1,
+            input2: input2
+          },
+          success: function(response) {
+            console.log(response)
+            console.log(response.length);
+            alert("기사가 작성되었습니다");
+            location.href = "http://localhost/printNews"
+          }
+        })
+    });
+  </script>
+</body>
+
+</html>
