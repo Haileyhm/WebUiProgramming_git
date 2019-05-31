@@ -30,7 +30,7 @@ app.get('/read', function(req, res) {
 
 //사용자 조회
 app.get('/selectCitizen', function(req, res) {
-  var selectQuery = `SELECT * FROM citizenlist where name = '${req.query.name}' and region = '${req.query.region}' and birthdate = '${req.query.birthdate}'`;
+  var selectQuery = `SELECT * FROM citizenlist where name = '${req.query.name}' and phonenumber = '${req.query.phonenumber}' and birthdate = '${req.query.birthdate}'`;
   connection.query(selectQuery,
     function(err, rows, fields) {
       if (err) throw err;

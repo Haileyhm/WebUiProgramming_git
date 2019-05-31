@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    table {
+      width: 100%;
+    }
+
+    tr {
+      background: #eee;
+      padding: 5px;
+    }
+
+    td {
+      text-align: center;
+      padding: 5px;
+    }
+
+    tr,
+    td {
+      border: 1px solid #eee;
+    }
+
+    input {
+      padding: 10px 30px;
+      display: inline-block;
+      margin: 5px;
+      background: #99aaaa;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <table>
+    <tr>
+      <td>편명</td>
+      <td>항공기명</td>
+      <td>좌석수</td>
+      <td>출발지</td>
+      <td>목적지</td>
+      <td>출발시각</td>
+      <td>도착시각</td>
+    </tr> -->
+    <span><table id="flightInfo"></table></span>
+
+  <!-- </table> -->
+  <br>
+  <br>
+  <input type="button" id="flightInput" name="" value="항공편입력">
+  <input type="button" id="aircraftInput" name="" value="항공기입력">
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+    $.ajax({
+      url: `/selectFlightInfo`,
+      data: {},
+      success: function(response) {
+        var table = "<tr><td>편명</td><td>항공기명</td><td>좌석수</td><td>출발지</td><td>목적지</td><td>출발시각</td><td>도착시각</td></tr>"
+        $('#flightInfo').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+        for (var i = 0; i < response.length; i++) {
+          console.log(response[i].no)
+          table += `<tr><td>${response[i].flightName}</td><td>${response[i].aircraftName}</td><td>${response[i].seats}</td><td>${response[i].departure}</td><td>${response[i].arrival}</td><td>${response[i].departTime}</td><td>${response[i].arrivalTime}`
+          $('#flightInfo').html(`${table}`)
+        }
+      }
+    });
+
+
+
+    // $.ajax({
+    //   url: `/selectFlightInfo`,
+    //   data: {},
+    //   success: function(response) {
+    //     $('#flightInfo').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+    //     for (var i = 0; i < response.length; i++) {
+    //       console.log(response[i].no)
+    //       var print = `${response[i].flightName}/ ${response[i].aircraftName}/ ${response[i].seats}/ ${response[i].departure}/ ${response[i].arrival}/ ${response[i].departTime}/ ${response[i].arrivalTime} `
+    //       $('#flightInfo').append(`${print}<br>`)
+    //     }
+    //   }
+    // });
+
+
+    $('#flightInput').click(function() {
+      location.href = "http://localhost/flightschedule"
+    });
+
+
+    $('#aircraftInput').click(function() {
+      location.href = "http://localhost/aircraft"
+    });
+  </script>
+
+
+
+
+
+</body>
+
+</html>

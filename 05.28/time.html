@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <input type="text" id="inputNum">
+  <input type="button" id="inputNumBtn" value="배수증가">
+  <input type="button" id="inputNumBtnStop" value="배수증가 멈춰">
+  <input type="button" id="strTimerBtn" value="타이머시작">
+  <input type="button" id="endTimerBtn" value="타이머종료">
+  <span id="timerResult">[타이머 결과 출력]</span>
+  <br>
+  <br>
+  <span id="inputNumResult"> [배수 결과 출력] </span>
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+    <!--setTimeout: 일정 시간 후에 특정 일 발생하게-->
+    <!--setInterval: 일정 시간동안 반복하여 특정 일 발생하-->
+    <!--clearInterval: setInterval 종료_ 얘를 변수에 답아서 clearInterval(변수.. 넣어) -->
+
+    var inputNumTimes = 0;
+    var cnt = 0;
+    var timesinterv;
+    var currinterv;
+
+    $('#inputNumBtn').click(function() {
+      setTimeout(function() {
+        timesinterv = setInterval(function() {
+
+          // for (i = 1; i<10; i++) {
+          //   inputNumTimes = inputNumTimes + $('#inputNum').val()  * i
+          //   $('#inputNumResult').append(`<br>${inputNumTimes}`)
+          //   console.log(inputNumTimes)
+          // console.log( $('#inputNum').val())
+
+          inputNumTimes = inputNumTimes + Number($('#inputNum').val())
+          $('#inputNumResult').append(`<br>${inputNumTimes}`)
+          console.log(inputNumTimes)
+        }, 2000);
+      }, 3000);
+    })
+
+
+    $('#strTimerBtn').click(function() {
+      setTimeout(function() {
+        timeinterv = setInterval(function() {
+          $('#timerResult').html(cnt)
+          console.log(cnt)
+          cnt++
+
+        }, 1000);
+      }, 3000);
+    })
+
+
+    $('#endTimerBtn').click(function() {
+
+      setTimeout(function() {
+        clearInterval(timeinterv)
+        $('#timerResult').html("타이머가 종료됐어융~")
+      }, 3000)
+    });
+
+
+    $('#inputNumBtnStop').click(function() {
+      setTimeout(function() {
+        clearInterval(timesinterv)
+        $('#inputNumResult').html("배수출력이 멈췄어요
+        ~")
+      }, 3000)
+    });
+
+
+
+
+
+
+    setTimeout(function() {}, 3000);
+
+
+    setInterval(function() {
+      console.log()
+    }, 1000);
+
+    clearInterval();;
+  </script>
+
+
+
+
+
+</body>
+
+</html>

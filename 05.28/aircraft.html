@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  항공코드/ 항공기명/ 좌석수
+  <br>
+  <br>
+  <span id="aircraftInfo"></span>
+  <br>
+  <br>
+  항공코드: <input type="text" id="aircraftCode"><br>
+  항공기명: <input type="text" id="aircraftName"><br>
+  좌석수: <input type="text" id="seats">
+  <br>
+  <br>
+  <input type="button" value="입력" id="inputBtn">
+  <input type="button" value="취소" id="cancelBtn">
+  <input type="button" value="조회" id="searchBtn">
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script type="text/javascript">
+    $('#aircraftCode').val('A380');
+    $('#aircraftName').val('KE313');
+    $('#seats').val('300');
+
+    $.ajax({
+      url: `/selectAircraft`,
+      data: {},
+      success: function(response) {
+        $('#aircraftInfo').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+        for (var i = 0; i < response.length; i++) {
+          var print = `${response[i].aircraftCode}/ ${response[i].aircraftName}/ ${response[i].seats}`
+          console.log(response[i].no)
+          $('#aircraftInfo').append(`${print} <input type="button" value="삭제" onclick="deleteEachAircraft(${response[i].no})"><br>`)
+        }
+      }
+    });
+
+
+
+    //항공기 정보 입력
+    $('#inputBtn').click(function() {
+      $.ajax({
+        url: `/inputAircraft`,
+        data: {
+          aircraftCode: $('#aircraftCode').val(),
+          aircraftName: $('#aircraftName').val(),
+          seats: $('#seats').val(),
+        },
+        success: function(response) {
+          location.href = "http://localhost/aircraft"
+        }
+      })
+    });
+
+    function deleteEachAircraft(no) {
+      $.ajax({
+        url: `/deleteEachAircraft`,
+        data: {
+          no: no
+        },
+        success: function(response) {
+          location.href = "http://localhost/aircraft"
+        }
+      })
+    };
+
+    $('#cancelBtn').click(function() {
+      location.href = "http://localhost/flightinfo"
+    });
+
+    $('#searchBtn').click(function() {
+      location.href = "http://localhost/flightinfo"
+    });
+
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+
+  편명/ 항공코드/ 출발지/ 목적지/ 출발시각/ 도착시각
+  <br>
+  <br>
+  <span id="flightScheduleInfo"></span>
+  <br><br>
+  편명: <input type="text" id="flightName"><br>
+  항공코드: <input type="text" id="aircraftCode"><br>
+  출발지: <input type="text" id="departure"><br>
+  목적지: <input type="text" id="arrival"><br>
+  출발시각: <input type="text" id="departTime"><br>
+  도착시간: <input type="text" id="arrivalTime"><br>
+  <br>
+
+  <input type="button" value="입력" id="inputBtn">
+  <input type="button" value="취소" id="cancelBtn">
+  <input type="button" value="조회" id="searchBtn">
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script type="text/javascript">
+    // $('#flightName').val('KE313');
+    // $('#aircraftCode').val('A380');
+    // $('#departure').val('ICN');
+    // $('#arrival').val('YYZ');
+    // $('#departTime').val('2019-05-30 10:30');
+    // $('#arrivalTime').val('2019-05-30 9:00');
+
+
+    $.ajax({
+      url: `/selectFlightSchedule`,
+      data: {},
+      success: function(response) {
+        $('#flightScheduleInfo').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+        for (var i = 0; i < response.length; i++) {
+          console.log(response[i].no)
+          var print = `${response[i].flightName}/ ${response[i].aircraftCode}/ ${response[i].departure}/ ${response[i].arrival}/ ${response[i].departTime}/ ${response[i].arrivalTime} `
+          $('#flightScheduleInfo').append(`${print} <input type="button" value="삭제" onclick="deleteEachFlight(${response[i].no})"><br>`)
+        }
+      }
+    });
+
+
+    $('#inputBtn').click(function() {
+      $.ajax({
+        url: `/inputFlightSchedule`,
+        data: {
+          flightName: $('#flightName').val(),
+          aircraftCode: $('#aircraftCode').val(),
+          departure: $('#departure').val(),
+          arrival: $('#arrival').val(),
+          departTime: $('#departTime').val(),
+          arrivalTime: $('#arrivalTime').val()
+        },
+        success: function(response) {
+          location.href = "http://localhost/flightschedule"
+        }
+      })
+    });
+
+
+    function deleteEachFlight(no) {
+      $.ajax({
+        url: `/deleteEachFlight`,
+        data: {
+          no: no
+        },
+        success: function(response) {
+          location.href = "http://localhost/flightschedule"
+        }
+      })
+    };
+
+
+    $('#cancelBtn').click(function() {
+      location.href = "http://localhost/flightschedule"
+    });
+
+
+    $('#searchBtn').click(function() {
+      location.href = "http://localhost/flightinfo"
+    });
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

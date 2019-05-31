@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>조회결과 출력</title>
+  <style>
+    form {
+      margin: 0 auto;
+      padding: 10px;
+      background: #eee;
+    }
+
+    label {
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+
+    input {
+      display: inline-block;
+      width: 300px;
+    }
+
+    div {
+      display: inline-block;
+      margin: 5px 0px 0px 140px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <br>
+  <div>[사용가능 횟수 출력창]</div>
+  <br>
+  <br>
+  <form>
+    <br>
+    <label>고유번호</label> <input type="text" id="userid">
+    <br>
+    <br>
+    <label>이름</label> <input type="text" id="name">
+    <br>
+    <br>
+    <label>지역</label> <input type="text" id="region">
+    <br>
+    <br>
+    <label>생년월일</label> <input type="text" id="birthdate">
+    <br>
+    <br>
+    <label>사용가능 횟수</label> <input type="text" id="balance">
+    <br>
+    <br>
+    <input type="button" value="확인">
+  </form>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $.ajax({
+      url: `/selecttobeupdate`,
+      data: {
+        userid: location.href.split("?")[1]
+      },
+      success: function(response) {
+        // console.log(response)
+        $('#userid').val(response[0].userid);
+        $('#name').val(response[0].name);
+        $('#region').val(response[0].region);
+        $('#birthdate').val(response[0].birthdate);
+        $('#balance').val(response[0].balance);
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>
