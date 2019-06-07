@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    input {
+     backgroundcolor : #DF7401
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart_div"></div>
+  <input type="button" id="btn" name="" value="그리기">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
+  <script type="text/javascript">
+
+
+  var arr = [];
+
+
+    $('#btn').click(function() {
+    //push 로 배열 안에 넣기_데이터를 완성한 후에 그림
+    for(let i =0; i < 10; i++){
+      arr.push([i, Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)])
+    }
+
+      google.charts.load('current', {
+        packages: ['corechart', 'line']
+      });
+
+
+      
+      google.charts.setOnLoadCallback(drawCurveTypes);
+
+
+
+    });
+
+
+    function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Dogs');
+      data.addColumn('number', 'Cats');
+      data.addColumn('number', 'Cow');
+
+      //Math.random() 0 ~ 0.99999 값을 랜덤으로 생성
+      // data.addRows([
+      //   [0, Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)],
+      //   [1, Math.random(), Math.random(), Math.random()],
+      //   [2, Math.random(), Math.random(), Math.random()],
+      //   [3, Math.random(), Math.random(), Math.random()],
+      //   [4, Math.random(), Math.random(), Math.random()],
+      //   [5, Math.random(), Math.random(), Math.random()],
+      //   [6, Math.random(), Math.random(), Math.random()],
+      //   [7, Math.random(), Math.random(), Math.random()],
+      //   [8, Math.random(), Math.random(), Math.random()],
+      //   [9, Math.random(), Math.random(), Math.random()],
+      //   [10, Math.random(), Math.random(), Math.random()]
+      // ]);
+
+
+      //for 문 써서 넣기_데이터를 한 줄씩 쓰면서 그리기
+      for (var i = 0; i < 11; i++) {
+        data.addRows([
+          [i, Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)]
+        ])
+      };
+
+
+
+
+      var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Popularity'
+        },
+        series: {
+          1: {
+            curveType: 'function'
+          }
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

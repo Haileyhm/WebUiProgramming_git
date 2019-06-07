@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+
+  <input type="button" id="getStockInfo " value="그리기">
+
+  <div id="chart_div"></div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+    var timeinterv; // 전역변수로 해야 다른 버튼에서도 알아
+    var now = new Date();
+    var arr = [];
+
+    timeinterv = setInterval(function() {
+      $.ajax({
+        url: `/requestTest`,
+        data: {},
+        success: function(response) {
+          console.log(response) //얘는 가격
+
+          google.charts.load('current', {
+            packages: ['corechart', 'line']
+          });
+          google.charts.setOnLoadCallback(drawCurveTypes);
+
+          arr.push([i, Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)])
+
+        }
+      })
+    }, 1000)
+
+
+
+    $('#stopTimer').click(function() {
+      clearInterval(timeinterv)
+      $('#stockResult').html("타이머가 종료됐어융~")
+    });
+
+
+    function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Dogs');
+      data.addColumn('number', 'Cats');
+
+      data.addRows(arr);
+
+      var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Popularity'
+        },
+        series: {
+          1: {
+            curveType: 'function'
+          }
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+
+
+</body>
+
+</html>

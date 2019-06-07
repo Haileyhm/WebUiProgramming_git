@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  <input type="button" id="ajaxBtn" value="ajax">
+  <input type="button" id="stopTimer" value="Stop Loading">
+  <span><table id="stockResult"></table></span>
+
+
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    // var currentTime = timestamp();
+    // var cnt = 0;
+    var timeinterv; // 전역변수로 해야 다른 버튼에서도 알아
+    var now = new Date();
+
+    $('#ajaxBtn').click(function() {
+      $.ajax({
+        url: `/requestTest`,
+        data: {},
+        success: function(response) {
+          console.log(response)
+
+          // $('#stockResult').append(`현재시각: ${now}, 가격: ${response}`) //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+          timeinterv = setInterval(function() {
+            $.ajax({
+              url: `/input`,
+              data: {
+                price: response
+              },
+              success: function(response) {
+                console.log(response)
+                console.log(cnt)
+                // cnt++
+                var table = "<tr><td>시각</td><td>가격</td></tr>"
+                table += `${}`
+                $('#stockResult').append(`시각: ${now}, 가격: ${response}`) //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+              }
+            })
+          }, 1000)
+        }
+      })
+    });
+
+
+
+    $('#stopTimer').click(function() {
+      clearInterval(timeinterv)
+      $('#stockResult').html("타이머가 종료됐어융~")
+    });
+  </script>
+</body>
+
+</html>
