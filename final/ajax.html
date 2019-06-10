@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <span id="priceView"></span><br><br>
+  <span id="selectView"></span><br><br>
+  <input type="button" value="ajax" id="ajaxBtn">
+  <input type="button" value="그만 찍어" id="stopBtn">
+  <input type="button" value="불러와" id="selectBtn">
+  <input type="button" value="그래프보여주까?" id="chartBtn">
+  <span id="priceView"></span><br><br>
+  <span id="maxmin"></span>
+  <span id="selectView"></span><br><br>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <div id="chart_div"></div>
+
+
+</body>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+  var timeinterv;
+  var chartinterv;
+  var arr;
+  var maxValue;
+  var minValue;
+
+  $("#ajaxBtn").click(function() {
+    timeinterv = setInterval(function() {
+      $.ajax({
+        url: `/requestTest`,
+        data: {},
+        success: function(res) {
+          console.log(res);
+          var price = res
+          $("#priceView").html(`${price} <br>`);
+          $.ajax({
+            url: `http://localhost/input`,
+            data: {
+              price: price
+            },
+            success: function(response) {}
+          })
+        }
+      })
+    }, 2000)
+  });
+
+
+  $("#stopBtn").click(function() {
+    clearInterval(timeinterv)
+    $('#priceView').html("타이머가 종료됐어융~")
+  });
+
+
+
+
+  $("#selectBtn").click(function() {
+    $.ajax({
+      url: `http://localhost/priceSelect`,
+      data: {},
+      success: function(response) {
+        $("#selectView").html("");
+        for (var i = 0; i < response.length; i++) {
+          var result = `${response[i].time} /${response[i].price} `
+          $("#selectView").append(`${result} <br>`);
+        }
+      }
+    });
+
+  });
+
+
+  $("#chartBtn").click(function() {
+    chartinterv = setInterval(function() {
+      var price = []
+      var time = []
+      arr = [];
+
+      $.ajax({
+        url: `http://localhost/priceSelect`,
+        data: {},
+        success: function(response) {
+
+          for (var i = 0; i < response.length; i++) {
+            price[i] = response[i].price
+            time[i] = response[i].time
+            maxValue = Math.max.apply(null, price)
+            minValue = Math.min.apply(null, price)
+            $("#maxmin").html(`최고가: ${maxValue} / 최저가: ${minValue}`);
+            console.log(time[i])
+            time[i] = time[i].split('T')[1]
+            time[i] = time[i].split('.')[0]
+            // time[i] = time[i].replace(':', '')
+            // time[i] = Number(time[i].replace(':', ''))
+            console.log(time[i])
+            arr.push([time[i], price[i]]) //빈배열에 담음
+          }
+
+          google.charts.load('current', {
+            packages: ['corechart', 'line']
+          });
+
+          google.charts.setOnLoadCallback(drawCurveTypes);
+        }
+
+      });
+    }, 2000)
+
+  });
+
+
+  function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'X');
+    data.addColumn('number', 'Kakao');
+
+    data.addRows(arr);
+
+    var options = {
+      width: 1000,
+      height: 200,
+
+      hAxis: { //x축 옵션
+        title: 'Time',
+        font: 50
+      },
+      vAxis: { //y축 옵션
+        title: 'Price',
+        // maxValue: 122000,
+        // minValue: 126000,
+        // ticks: {
+        //   suggestedMax: 126000,
+        //   beginAt: 122000
+        // },
+        viewWindowMode: 'explicit',
+        viewWindow: {
+          min: minValue - 1000,
+          max: maxValue + 1000
+        }
+      },
+      series: {
+        1: {
+          curveType: 'function'
+        }
+      }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+</html>
