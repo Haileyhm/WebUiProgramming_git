@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>김해리 기말고사</title>
+</head>
+
+<body>
+  <select id="selectOp">
+    <option value="035720">카카오</option>
+    <option value="047040">대우건설</option>
+    <option value="253450">스튜디오드래곤</option>
+    <option value="079160">CJ CGV</option>
+    <option value="035900">JYP Ent.</option>
+  </select>
+  <input type="button" id="btn" value="시작">
+  <span id="timerResult"></span>
+
+
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <br>
+  <br>
+  <span id="stockName"> </span>
+  <div id="chart_div"></div>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+  <script>
+    var cnt = 0;
+    var arr = [];
+    var timerinterv;
+    var requestinterv;
+
+
+    $("#btn").click(function() {
+      arr.length = 0;
+      clearInterval(timerinterv);
+      clearInterval(requestinterv);
+
+
+      //종목이름 출력
+      $("#stockName").html($("#selectOp option:checked").text())
+
+      //시간 출력
+      timerinterv = setInterval(function() {
+        cnt++
+        $("#timerResult").html(`경과시간: ${cnt}초`)
+      }, 1000);
+
+
+      requestinterv = setInterval(function() {
+        $.ajax({
+          url: `/requestTest`,
+          data: {
+            stockCode: $("#selectOp").val()
+          },
+          success: function(res) {
+            var price = res
+            arr.push([Number(cnt), Number(res)]) //빈배열에 담음
+
+            //배열의 길이가 10보다 길어지면 앞의 수 지워서 10개만 있도록 함
+            if (arr.length > 10) {
+              arr.shift()
+            }
+
+            google.charts.load('current', {
+              packages: ['corechart', 'line']
+            });
+
+            google.charts.setOnLoadCallback(drawCurveTypes);
+          }
+        })
+      }, 1000)
+    });
+
+
+
+    function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'time');
+      data.addColumn('number', '가격');
+
+      data.addRows(arr);
+
+      var options = {
+        width: 1000,
+        height: 200,
+
+        hAxis: { //x축 옵션
+          title: 'time',
+          font: 50
+        },
+        vAxis: { //y축 옵션
+          title: 'Popularity',
+          viewWindowMode: 'explicit',
+          viewWindow: {}
+        },
+        backgroundColor: '#FBF8EF',
+        series: {
+          1: {
+            curveType: 'function'
+          }
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+
+
+
+
+</body>
+
+</html>
