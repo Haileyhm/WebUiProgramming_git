@@ -21,6 +21,11 @@ var connection = mysql.createConnection({
 });
 
 
+//사용자 조회창 띄우기
+app.get('/jinan', function(req, res) {
+  res.sendfile("main.html")
+})
+
 
 //사용자 조회창 띄우기
 app.get('/read', function(req, res) {
@@ -30,6 +35,18 @@ app.get('/read', function(req, res) {
 
 //사용자 조회
 app.get('/selectCitizen', function(req, res) {
+  var selectQuery = `SELECT * FROM citizenlist where name = '${req.query.name}' and phonenumber = '${req.query.phonenumber}' and birthdate = '${req.query.birthdate}'`;
+  connection.query(selectQuery,
+    function(err, rows, fields) {
+      if (err) throw err;
+      res.send(rows);
+    }
+  )
+});
+
+
+//미용실 서비스 횟수 조회
+app.get('/selectshop', function(req, res) {
   var selectQuery = `SELECT * FROM citizenlist where name = '${req.query.name}' and phonenumber = '${req.query.phonenumber}' and birthdate = '${req.query.birthdate}'`;
   connection.query(selectQuery,
     function(err, rows, fields) {
@@ -74,30 +91,3 @@ app.get('/selecttobeupdate', function(req, res) {
     }
   )
 });
-
-
-
-
-
-
-
-// //하나만 삭제하는 라우터
-// app.get('/deleteBalance', function(req, res) {
-//   var inputQuery = `delete balance from citizenlist where no=${req.query.no}`;
-//   connection.query(inputQuery,
-//     function(err, rows, fields) {
-//       res.send(rows)
-//     }
-//   )
-// });
-
-
-// //수정하는 라우터
-//
-// app.get('/inputNewsss', function(req, res) {
-//   res.sendfile("뉴스입력.html")
-// })
-//
-// app.get('/printNews', function(req, res) {
-//   res.sendfile("printNews.html")
-// })
