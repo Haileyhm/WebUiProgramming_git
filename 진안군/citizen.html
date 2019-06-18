@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
+  <title>사용자 조회</title>
+  <style>
+    table {
+      width: 100%;
+    }
+
+    tr {
+      background: #9FF781;
+      padding: 5px;
+    }
+
+    td {
+      text-align: center;
+      padding: 5px;
+    }
+
+    table {
+      border: 1px solid #0B610B;
+    }
+
+    form {
+      margin: 0 auto;
+      padding: 10px;
+      background: #58ACFA;
+    }
+
+    label {
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px 30px;
+      display: inline-block;
+      margin: 5px;
+      color: #0431B4;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+
+    p {
+      font-family: verdana;
+      font-size: 35px;
+      text-align: center;
+      font-color: black;
+
+    }
+
+    div {
+
+      display: inline-block;
+      margin: 5px 0px 0px 140px;
+    }
+  </style>
+
+<meta name = "viewport" content ="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <br>
+  <p> [사용가능 여부 조회] </p>
+  <br>
+  <br>
+  <form>
+
+    <br>
+    <label> 이름 </label><input type="text" id="name">
+    <br>
+    <br>
+    <label> 생년월일 </label><input type="text" id="birthdate" value="">
+    <br>
+    <br>
+    <label> 전화번호 뒷 4자리 </label><input type="text" id="phonenumber">
+    <br>
+    <br>
+    <div><input type="button" id="readBtn" name="" value="조회하기"></div>
+    <br>
+    <br>
+    <span>
+      <table id="resultArea"></table>
+    </span>
+    <br>
+  </form>
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $("#name").val("김해리");
+    $("#birthdate").val("470325");
+    $("#phonenumber").val("1213");
+
+    $('#readBtn').click(function() {
+      $.ajax({
+        url: `/selectCitizen`,
+        data: {
+          name: $('#name').val(),
+          birthdate: $('#birthdate').val(),
+          phonenumber: $('#phonenumber').val()
+        },
+        success: function(response) {
+          $('#resultArea').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+
+          var table = "<tr><td>고유번호</td><td>이름</td><td>생년월일</td><td>전화번호 뒷 4자리</td><td>잔여 이용 가능 횟수</td><td>사용</td></tr>"
+          for (var i = 0; i < response.length; i++) {
+            table +=
+              `<tr><td>${response[i].userid}</td><td>${response[i].name}</td><td>${response[i].birthdate}</td><td>${response[i].phonenumber}</td><td>${response[i].balance}</td><td><input type="button" value="사용" onclick="CommitEach(${response[i].balance}, '${response[i].userid}')"></td></tr></tr><tr><td colspan="6"><input type="button" onclick="location.href= '/jinan'" id="backToMain" value="뒤로가기"></td></tr>`
+            $('#resultArea').append(`${table} `)
+          }
+        }
+      })
+    });
+
+
+    function CommitEach(balance, userid) {
+      if (Number(balance) == 0) {
+        alert("사용가능한 횟수를 초과하셨습니다");
+        location.href = "http://localhost/read";
+      } else {
+        $.ajax({
+          url: `/updateBalance`,
+          data: {
+            balance: Number(balance) - 1,
+            userid: userid
+          },
+          success: function(response) {
+            alert("사용가능 횟수가 1회 차감되었습니다");
+            location.href = "http://localhost/read";
+          }
+        })
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>홈</title>
+  <meta name = "viewport" content ="width=device-width, initial-scale=1.0">
+</head>
+
+<!-- Banner -->
+  <section id="banner">
+    <div class="inner">
+      <header>
+        <h1>진안군 이미용 조회 앱</h1>
+      </header>
+
+
+
+<body>
+
+  <input type="button" value="어르신 조회" id="citizen">
+  <br>
+  <br>
+  <input type="button" value="미용실 조회" id="shop">
+
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+    $("#citizen").click(function() {
+      location.href = "/read"
+    });
+
+
+    $("#shop").click(function() {
+      location.href = "/shop"
+    });
+
+  </script>
+
+</body>
+
+</html>

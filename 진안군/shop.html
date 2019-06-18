@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
+  <title>사용자 조회</title>
+  <style>
+    table {
+      width: 100%;
+    }
+
+    tr {
+      background: #9FF781;
+      padding: 5px;
+    }
+
+    td {
+      text-align: center;
+      padding: 5px;
+    }
+
+    table {
+      border: 1px solid #0B610B;
+    }
+
+    form {
+      margin: 0 auto;
+      padding: 10px;
+      background: #58ACFA;
+    }
+
+    label {
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px 30px;
+      display: inline-block;
+      margin: 5px;
+      color: #0431B4;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+
+    p {
+      font-family: verdana;
+      font-size: 35px;
+      text-align: center;
+      font-color: black;
+
+    }
+
+    div {
+
+      display: inline-block;
+      margin: 5px 0px 0px 140px;
+    }
+  </style>
+
+<meta name = "viewport" content ="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+  <br>
+  <p> [서비스 횟수 조회] </p>
+  <br>
+  <br>
+  <form>
+
+    <br>
+    <label> 고유번호 </label><input type="text" id="shopid">
+    <br>
+    <br>
+    <label> 사업주 이름 </label><input type="text" id="owner">
+    <br>
+    <br>
+    <label> 전화번호 뒷 4자리 </label><input type="text" id="phonenumber">
+    <br>
+    <br>
+    <div><input type="button" id="readBtn" value="조회하기"></div>
+    <br>
+    <br>
+    <span>
+      <table id="resultArea"></table>
+    </span>
+  </form>
+
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script>
+  $("#shopid").val("KK1245");
+  $("#owner").val("강미선");
+  $("#phonenumber").val("1245");
+
+
+
+
+    $('#readBtn').click(function() {
+      $.ajax({
+        url: `/selectshop`,
+        data: {
+          shopid: $('#shopid').val(),
+          owner: $('#owner').val(),
+          phonenumber: $('#phonenumber').val()
+        },
+        success: function(response) {
+          $('#resultArea').html("") //response 받았을 때 다 지우고 출력하니깐 중복해서 쌓이지 않지~
+
+          var table = "<tr><td>고유번호</td><td>사업장 이름</td><td>사업주 이름</td><td>전화번호 뒷 4자리</td><td>서비스 제공 횟수</td></tr>"
+          for (var i = 0; i < response.length; i++) {
+            table +=
+              `<tr><td>${response[i].shopid}</td><td>${response[i].name}</td><td>${response[i].owner}</td><td>${response[i].phonenumber}</td><td>${response[i].service}</td></tr><tr><td colspan="5"><input type="button" onclick="location.href= '/jinan'" id="backToMain" value="뒤로가기"></td></tr>`
+            $('#resultArea').append(`${table}`)
+          }
+        }
+      })
+    });
+
+
+
+
+
+  </script>
+</body>
+
+</html>
